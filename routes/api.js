@@ -11,10 +11,16 @@ const Post = require('../models/post')
 // GETTING ALL POSTS FROM API 
 router.get('/', (req, res) => {
 
-    Post.find((err, posts) => {
-        if(err) return console.log(err)
-        res.json(posts)
-    })
+    Post.find()  
+        .sort('-createdAt')
+        .exec((err, posts) => {
+           if(err) return console.log(err)
+           res.json(posts) 
+        })
+    // Post.find((err, posts) => {
+    //     if(err) return console.log(err)
+    //     res.json(posts)
+    // })
 })
 
 // Getting specific post. Although cant think of any use for this
@@ -37,7 +43,7 @@ router.post('/', (req ,res) => {
     post.save((err, post) => {
         if(err) return console.log(err)
         console.log(`Post saved from : ${post.name}`)
-        res.send('Post saved.')
+        res.send(true)
     })
 })
 
