@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGO_URI_ONLINE, {useNewUrlParser: true, useUnifie
 app.use(cors())
 app.use(express.json())
 
+app.use('/', require('./routes/root'))
 app.use('/api', require('./routes/api'))
 
 const port = process.env.PORT || 5000
