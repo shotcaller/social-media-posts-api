@@ -13,10 +13,12 @@ mongoose.connect(process.env.MONGO_URI_OFFLINE, {useNewUrlParser: true, useUnifi
 }).then(()=> {
     console.log('MongoDB connected....')
 })
+
 app.use(cors())
 app.use(express.json())
 
 app.use('/', require('./routes/api'))
+app.use('/users', require('./routes/users'))
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server started at ${port}`))
