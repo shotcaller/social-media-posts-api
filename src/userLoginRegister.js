@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
+const initializePassport = require('../src/passport-config')
+const passport = require('passport')
+
+initializePassport(passport)
 
 
 exports.registerUser =  async (req, res) => {
@@ -26,3 +30,4 @@ exports.registerUser =  async (req, res) => {
                                     
 
 }
+

@@ -2,10 +2,13 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const dotenv =  require('dotenv').config({path: './config/config.env'})
+const flash = require('express-flash')
+const passport = require('passport')
 
 
 const app = express()
 
+// Connecting to Database
 mongoose.connect(process.env.MONGO_URI_OFFLINE, {useNewUrlParser: true, useUnifiedTopology: true},(err) =>{
     if(err) {
         console.log(`Error while connecting to MongoDB: ${err}`)
@@ -14,9 +17,16 @@ mongoose.connect(process.env.MONGO_URI_OFFLINE, {useNewUrlParser: true, useUnifi
     console.log('MongoDB connected....')
 })
 
+
+
 app.use(cors())
 app.use(express.json())
+app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
 
+
+//Routes handlers
 app.use('/', require('./routes/api'))
 app.use('/users', require('./routes/users'))
 
