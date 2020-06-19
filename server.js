@@ -3,8 +3,10 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const dotenv =  require('dotenv').config({path: './config/config.env'})
 const flash = require('express-flash')
+const initializePassport = require('./src/passport-config')
 const passport = require('passport')
 
+initializePassport(passport)
 
 const app = express()
 

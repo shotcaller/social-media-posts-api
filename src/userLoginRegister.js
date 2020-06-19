@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
-const initializePassport = require('../src/passport-config')
 const passport = require('passport')
 
-initializePassport(passport)
 
 
 exports.registerUser =  async (req, res) => {
@@ -26,8 +24,20 @@ exports.registerUser =  async (req, res) => {
 
         console.log(`User ${name} registered.`)
         res.send(`User ${name} registered.`)
-    })
-                                    
+    })                                  
+}
 
+exports.checkUser = (req, res) => {
+    const { username } = req.body
+
+    User.exists({username: username}, (err, result) => {
+        if(err) {
+           return console.log(err)
+        }
+
+        res.send(result)
+        console.log('Sent result')
+
+    })
 }
 
