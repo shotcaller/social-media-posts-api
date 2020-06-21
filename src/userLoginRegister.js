@@ -7,7 +7,7 @@ const passport = require('passport')
 
 exports.registerUser =  async (req, res) => {
 
-    const { name, username, email, password } = req.body
+    const { name, username, email, password } = req.body.user
     
         const hashedPassword = await bcrypt.hash(password, 10)
     
@@ -22,8 +22,8 @@ exports.registerUser =  async (req, res) => {
     user.save((err, user) => {
         if(err) return console.log(err)
 
-        console.log(`User ${name} registered.`)
-        res.send(`User ${name} registered.`)
+        console.log(`User ${username} registered.`)
+        res.send(`User ${username} registered.`)
     })                                  
 }
 
@@ -36,7 +36,6 @@ exports.checkUser = (req, res) => {
         }
 
         res.send(result)
-        console.log('Sent result')
 
     })
 }
