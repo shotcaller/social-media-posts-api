@@ -40,3 +40,12 @@ exports.checkUser = (req, res) => {
     })
 }
 
+exports.findName = (req, res) => {
+    const name = req.params.name
+    User.findOne({ username: name}, (err, user) => {
+        if (err) return console.log(err)
+
+        res.json(user.name)
+    })
+}
+

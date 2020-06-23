@@ -32,17 +32,17 @@ router.get('/:id', (req, res) => {
 //POSTING A POST
 router.post('/', (req ,res) => {
 
-    const pname = req.body.name
+    const pname = req.body.username
     const pmessage = req.body.message
 
     let post = new Post({
-        name: pname,
+        username: pname,
         message: pmessage
     })
 
     post.save((err, post) => {
         if(err) return console.log(err)
-        console.log(`Post saved from : ${post.name}`)
+        console.log(`Post saved from : ${post.username}`)
         res.send(true)
     })
 })

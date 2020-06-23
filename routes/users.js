@@ -3,7 +3,7 @@ const router  = express.Router()
 const mongoose = require('mongoose')
 const passport = require('passport')
 
-const { registerUser, checkUser } = require('../src/userLoginRegister')
+const { registerUser, checkUser, findName } = require('../src/userLoginRegister')
 
 mongoose.set('useFindAndModify', false);
 
@@ -26,6 +26,11 @@ router.post('/register', (req, res) =>{
 
 router.post('/checkuser', (req, res) => {
     checkUser(req, res)
+})
+
+router.get('/getname/:name', (req,res) => {
+    findName(req,res)
+
 })
 
 module.exports = router
