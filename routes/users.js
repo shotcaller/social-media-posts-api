@@ -33,4 +33,8 @@ router.get('/getname/:name', (req,res) => {
 
 })
 
+router.get('/liker', (req, res) => {
+    res.send("OK")
+})
+
 module.exports = router

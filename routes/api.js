@@ -7,6 +7,8 @@ mongoose.set('useFindAndModify', false);
 
 const Post = require('../models/post')
 
+const { likePost,checkLike } = require('../src/LikeUnlike')
+
 
 // GETTING ALL POSTS FROM API 
 router.get('/', (req, res) => {
@@ -17,10 +19,6 @@ router.get('/', (req, res) => {
            if(err) return console.log(err)
            res.json(posts) 
         })
-    // Post.find((err, posts) => {
-    //     if(err) return console.log(err)
-    //     res.json(posts)
-    // })
 })
 
 // Getting specific post. Although cant think of any use for this
@@ -54,23 +52,14 @@ router.put('/:id', (req , res) => {
 })
 
 //Liking a post with param = post._id
-router.put('/like/:id', (req,res) => {
+
+router.put('/post/like', (req,res) => {
+     likePost(req, res)
     
-    Post.findOneAndUpdate( {_id: req.params.id}, 
-        {$inc : {'like': 1}}, (err) => {
-            if (err) return console.log(err)
-            res.send(`Liked a post of id: ${req.params.id}`)
-        })
 })
 
-//Unliking a post
-router.put('/unlike/:id', (req, res) => {
-    const opts = { runValidators: true }
-    Post.findOneAndUpdate( {_id: req.params.id},opts, 
-        {$inc : {'like': -1}}, (err) => {
-            if (err) return console.log(err)
-            res.send(`Unliked a post of id: ${req.params.id}`)
-        })
+router.put('/post/checklike', (req, res) => {
+    checkLike(req, res)
 })
 
 //Deleting a post. Will complete once user accs created.
