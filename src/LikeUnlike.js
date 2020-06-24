@@ -13,7 +13,7 @@ exports.likePost = (req, res) => {
 
         if(post.likeList.some(liker => liker.username === username)) {
             Post.findOneAndUpdate({_id: postId}, {$pull: {likeList: {username: username}}, 
-                                $set: {like: likeList.length}},(err, updatedPost) => {
+                                $set: {like: post.likeList.length}},(err, updatedPost) => {
                                     if(err) return console.log(err)
                                     res.send('unliked')
                                 })
@@ -21,7 +21,7 @@ exports.likePost = (req, res) => {
         }
         else {
                  Post.findOneAndUpdate({_id: postId}, {$push: {likeList: {username: username}},
-                         $set: { like: likeList.length } },(err, updatedPost) => {
+                         $set: { like: post.likeList.length } },(err, updatedPost) => {
                      if (err) return console.log(err)
                      res.send('liked')
                  })
