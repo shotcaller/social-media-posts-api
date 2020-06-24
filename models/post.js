@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema({
         default: 0,
         min: 0
     },
-    likeList: [{username: String}]
+    likeList: [{username: { type: String, unique: true}}]
 
 }, {
     timestamps: true
