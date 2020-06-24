@@ -11,7 +11,7 @@ initializePassport(passport)
 const app = express()
 
 // Connecting to Database
-mongoose.connect(process.env.MONGO_URI_OFFLINE, {useNewUrlParser: true, useUnifiedTopology: true},(err) =>{
+mongoose.connect(process.env.MONGO_URI_ONLINE, {useNewUrlParser: true, useUnifiedTopology: true},(err) =>{
     if(err) {
         console.log(`Error while connecting to MongoDB: ${err}`)
     }
